@@ -74,14 +74,10 @@ Para hospedar o seu próprio fork:
 
 ## 📸 Preview
 
-<img width="1350" height="4717" alt="preview" src="https://github.com/user-attachments/assets/5dc63ed1-6b7d-4aa8-8e11-dbd34d2e78a8" />
+<img width="1350" height="4717" alt="preview_v2" src="https://github.com/user-attachments/assets/6768cece-4fe8-4e20-b136-dbc468d0424b" />
 
 ---
 
 ## 📬 Contato
 
 **Miguel Rodrigues Freitas** — [linkedin.com/in/miguelrfreitas](https://linkedin.com/in/miguelrfreitas) — miguel.frtas@gmail.com
-=======
-# portfolio
-Meu primeiro portfólio
->>>>>>> 02ee2aa6bc2dc05ad69ee8f4ac0bf496899970e7
