@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 # 🌐 Portfólio — Miguel Freitas
 
 > Portfólio pessoal desenvolvido com **HTML, CSS e JavaScript puros** — sem frameworks, sem dependências de build.
 
-[![Deploy](https://img.shields.io/badge/🚀_Ver_online-4f8ef7?style=for-the-badge)](https://miguelrfreitas.dev)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](.)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](.)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](.)
@@ -76,7 +74,7 @@ Para hospedar o seu próprio fork:
 
 ## 📸 Preview
 
-> _screenshot em breve_
+<img width="1350" height="4717" alt="preview" src="https://github.com/user-attachments/assets/5dc63ed1-6b7d-4aa8-8e11-dbd34d2e78a8" />
 
 ---
 
