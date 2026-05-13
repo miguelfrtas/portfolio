@@ -61,7 +61,7 @@
     .hero-scroll { position:absolute;bottom:40px;left:48px;display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;animation:fadeUp .6s .5s ease both; }
     .scroll-line { width:40px;height:1px;background:linear-gradient(90deg,var(--accent),transparent); }
     .hero-float { position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:16px;animation:fadeLeft .8s .4s ease both; }
-    @media(max-width:900px){.hero-float{display:none;}}
+    @media(max-width:1100px){.hero-float{display:none;}} @media(max-width:900px){.hero-float{display:none;}}
     .float-card { background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:20px 24px;min-width:200px;backdrop-filter:blur(10px);transition:transform .3s,box-shadow .3s; }
     .float-card:hover { transform:translateY(-4px) rotate(0deg)!important;box-shadow:0 12px 40px rgba(0,0,0,.4); }
     .float-card:first-child { transform:rotate(-2deg); }
@@ -308,100 +308,110 @@
     .modal-badge--blue   { background:rgba(79,142,247,.12); border-color:rgba(79,142,247,.25); color:#4f8ef7; }
     .modal-badge--purple { background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.25);color:#a78bfa; }
 
-    /* ── GITHUB ACTIVITY ── */
-    #github .inner { padding-bottom: 100px; }
-
-    .github-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 14px;
-      margin-bottom: 36px;
+    /* ── FORMA GEOMÉTRICA 3D ── */
+    .geo-wrap {
+      position: absolute;
+      right: 80px; top: 50%;
+      transform: translateY(-50%);
+      width: 260px; height: 260px;
+      perspective: 800px;
+      z-index: 0;
+      pointer-events: none;
     }
-    .gh-stat {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 14px; padding: 20px 22px;
-      display: flex; align-items: center; gap: 14px;
-      transition: border-color .25s, transform .25s;
+    @media(max-width:1100px){ .geo-wrap { display:none; } }
+
+    .geo-scene {
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      animation: geoSpin 14s linear infinite;
       will-change: transform;
     }
-    .gh-stat:hover { border-color: rgba(79,142,247,.3); transform: translateY(-3px); }
-    .gh-stat-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: rgba(79,142,247,.12); border: 1px solid rgba(79,142,247,.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; flex-shrink: 0;
+    @keyframes geoSpin {
+      from { transform: rotateX(20deg) rotateY(0deg) rotateZ(8deg); }
+      to   { transform: rotateX(20deg) rotateY(360deg) rotateZ(8deg); }
     }
-    .gh-stat-val { font-family:'Syne',sans-serif; font-weight:800; font-size:1.5rem; color:var(--text); line-height:1; }
-    .gh-stat-val span { color: var(--accent); }
-    .gh-stat-label { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-top:3px; }
 
-    .gh-graph-wrap {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 18px; padding: 28px 28px 24px;
+    /* cubo — 6 faces */
+    .geo-face {
+      position: absolute;
+      width: 160px; height: 160px;
+      left: 50px; top: 50px;
+      border: 1.5px solid rgba(79,142,247,.5);
+      background: rgba(79,142,247,.04);
+      backdrop-filter: blur(2px);
     }
-    .gh-graph-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
-    }
-    .gh-graph-title { font-size:.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; font-weight:600; }
-    .gh-legend { display:flex; align-items:center; gap:6px; font-size:.72rem; color:var(--muted); }
-    .gh-legend-cells { display:flex; gap:3px; align-items:center; }
-    .gh-legend-cell { width:11px; height:11px; border-radius:3px; }
+    .geo-face.front  { transform: translateZ(80px); }
+    .geo-face.back   { transform: rotateY(180deg) translateZ(80px); }
+    .geo-face.left   { transform: rotateY(-90deg) translateZ(80px); }
+    .geo-face.right  { transform: rotateY(90deg)  translateZ(80px); }
+    .geo-face.top    { transform: rotateX(90deg)  translateZ(80px); }
+    .geo-face.bottom { transform: rotateX(-90deg) translateZ(80px); }
 
-    .gh-grid-scroll { overflow-x: auto; padding-bottom: 4px; }
-    .gh-grid-scroll::-webkit-scrollbar { height: 4px; }
-    .gh-grid-scroll::-webkit-scrollbar-track { background: transparent; }
-    .gh-grid-scroll::-webkit-scrollbar-thumb { background: rgba(79,142,247,.2); border-radius:4px; }
+    /* arestas brilhantes em cada face */
+    .geo-face::before {
+      content: '';
+      position: absolute; inset: -1px;
+      background: linear-gradient(135deg, rgba(79,142,247,.3) 0%, transparent 50%, rgba(126,184,247,.15) 100%);
+      pointer-events: none;
+    }
 
-    .gh-grid {
-      display: flex; gap: 3px;
-      width: max-content;
+    /* ponto de luz central */
+    .geo-core {
+      position: absolute;
+      width: 12px; height: 12px;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 20px 6px rgba(79,142,247,.4), 0 0 60px 20px rgba(79,142,247,.15);
+      animation: corePulse 3s ease-in-out infinite;
     }
-    .gh-col { display: flex; flex-direction: column; gap: 3px; }
-    .gh-cell {
-      width: 12px; height: 12px; border-radius: 3px;
-      background: rgba(255,255,255,.05);
-      transition: transform .15s, opacity .15s;
-      cursor: default;
-      flex-shrink: 0;
+    @keyframes corePulse {
+      0%,100% { box-shadow: 0 0 20px 6px rgba(79,142,247,.4), 0 0 60px 20px rgba(79,142,247,.15); }
+      50%      { box-shadow: 0 0 30px 10px rgba(79,142,247,.6), 0 0 80px 30px rgba(79,142,247,.2); }
     }
-    .gh-cell:hover { transform: scale(1.4); opacity: .9; }
-    .gh-cell[data-level="1"] { background: rgba(79,142,247,.25); }
-    .gh-cell[data-level="2"] { background: rgba(79,142,247,.50); }
-    .gh-cell[data-level="3"] { background: rgba(79,142,247,.75); }
-    .gh-cell[data-level="4"] { background: rgba(79,142,247,1);   }
 
-    .gh-months {
-      display: flex; gap: 3px;
-      font-size: .65rem; color: var(--muted);
-      margin-bottom: 6px;
-      width: max-content;
+    /* anel orbital ao redor do cubo */
+    .geo-ring {
+      position: absolute;
+      width: 220px; height: 220px;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%) rotateX(75deg);
+      border-radius: 50%;
+      border: 1px solid rgba(79,142,247,.2);
+      animation: ringDrift 14s linear infinite reverse;
+      will-change: transform;
     }
-    .gh-month-label { width: 12px; text-align: center; overflow:visible; white-space:nowrap; }
+    .geo-ring::after {
+      content: '';
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--accent2);
+      border-radius: 50%;
+      top: -4px; left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px 3px rgba(126,184,247,.5);
+    }
+    @keyframes ringDrift {
+      from { transform: translate(-50%,-50%) rotateX(75deg) rotateZ(0deg); }
+      to   { transform: translate(-50%,-50%) rotateX(75deg) rotateZ(360deg); }
+    }
 
-    .gh-loading {
-      display: flex; align-items: center; justify-content: center;
-      height: 120px; color: var(--muted); font-size: .875rem; gap: 10px;
+    /* segundo anel inclinado diferente */
+    .geo-ring-2 {
+      position: absolute;
+      width: 240px; height: 240px;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%) rotateX(75deg) rotateZ(60deg);
+      border-radius: 50%;
+      border: 1px dashed rgba(79,142,247,.12);
+      animation: ringDrift2 20s linear infinite;
+      will-change: transform;
     }
-    .gh-spinner {
-      width: 18px; height: 18px; border: 2px solid rgba(79,142,247,.2);
-      border-top-color: var(--accent); border-radius: 50%;
-      animation: spin .7s linear infinite;
+    @keyframes ringDrift2 {
+      from { transform: translate(-50%,-50%) rotateX(55deg) rotateZ(60deg); }
+      to   { transform: translate(-50%,-50%) rotateX(55deg) rotateZ(420deg); }
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .gh-error { text-align:center; color:var(--muted); font-size:.875rem; padding:40px 0; }
-
-    /* tooltip */
-    .gh-tooltip {
-      position: fixed; z-index: 200;
-      background: var(--bg4); border: 1px solid rgba(255,255,255,.12);
-      border-radius: 8px; padding: 7px 12px;
-      font-size: .75rem; color: var(--text);
-      pointer-events: none; opacity: 0;
-      transition: opacity .15s;
-      white-space: nowrap;
-    }
-    .gh-tooltip.show { opacity: 1; }
   </style>
 </head>
 <body>
@@ -449,6 +459,22 @@
         <div class="fc-sub">TP · Claro · OBInvest · Innolevels · AZSEC</div>
       </div>
     </div>
+
+    <!-- FORMA GEOMÉTRICA -->
+    <div class="geo-wrap">
+      <div class="geo-ring-2"></div>
+      <div class="geo-ring"></div>
+      <div class="geo-scene">
+        <div class="geo-face front"></div>
+        <div class="geo-face back"></div>
+        <div class="geo-face left"></div>
+        <div class="geo-face right"></div>
+        <div class="geo-face top"></div>
+        <div class="geo-face bottom"></div>
+      </div>
+      <div class="geo-core"></div>
+    </div>
+
     <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
   </div>
 </section>
@@ -698,67 +724,6 @@
   </div>
 </template>
 
-
-<!-- GITHUB ACTIVITY -->
-<section id="github">
-  <div class="inner">
-    <div class="reveal"><div class="section-tag">// atividade</div></div>
-    <h2 class="reveal reveal-delay-1">GitHub</h2>
-
-    <div class="github-stats reveal reveal-delay-2" id="gh-stats">
-      <div class="gh-stat">
-        <div class="gh-stat-icon">⚡</div>
-        <div>
-          <div class="gh-stat-val" id="gh-commits"><span>—</span></div>
-          <div class="gh-stat-label">Commits no ano</div>
-        </div>
-      </div>
-      <div class="gh-stat">
-        <div class="gh-stat-icon">🔥</div>
-        <div>
-          <div class="gh-stat-val" id="gh-streak"><span>—</span></div>
-          <div class="gh-stat-label">Maior sequência</div>
-        </div>
-      </div>
-      <div class="gh-stat">
-        <div class="gh-stat-icon">📦</div>
-        <div>
-          <div class="gh-stat-val" id="gh-repos"><span>—</span></div>
-          <div class="gh-stat-label">Repositórios</div>
-        </div>
-      </div>
-      <div class="gh-stat">
-        <div class="gh-stat-icon">⭐</div>
-        <div>
-          <div class="gh-stat-val" id="gh-stars"><span>—</span></div>
-          <div class="gh-stat-label">Stars recebidas</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="gh-graph-wrap reveal">
-      <div class="gh-graph-header">
-        <span class="gh-graph-title">Atividade contínua — últimos 12 meses</span>
-        <div class="gh-legend">
-          menos
-          <div class="gh-legend-cells">
-            <div class="gh-legend-cell" style="background:rgba(255,255,255,.05)"></div>
-            <div class="gh-legend-cell" style="background:rgba(79,142,247,.25)"></div>
-            <div class="gh-legend-cell" style="background:rgba(79,142,247,.5)"></div>
-            <div class="gh-legend-cell" style="background:rgba(79,142,247,.75)"></div>
-            <div class="gh-legend-cell" style="background:rgba(79,142,247,1)"></div>
-          </div>
-          mais
-        </div>
-      </div>
-      <div id="gh-graph-container">
-        <div class="gh-loading"><div class="gh-spinner"></div> Carregando atividade…</div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="gh-tooltip" id="gh-tooltip"></div>
-
 <section id="contact">
   <div class="contact-glow"></div>
   <div class="inner reveal">
@@ -911,165 +876,6 @@
     });
   }, { threshold:.35 });
   sections.forEach(s => scrollSpy.observe(s));
-
-
-  // ── GITHUB ACTIVITY
-  const GH_USER = 'miguelrfreitas'; // ← seu username
-
-  async function loadGithub() {
-    try {
-      // Stats via REST API (pública, sem token)
-      const [userRes, reposRes] = await Promise.all([
-        fetch(`https://api.github.com/users/${GH_USER}`),
-        fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`)
-      ]);
-      if (userRes.ok) {
-        const user = await userRes.json();
-        const el = document.getElementById('gh-repos');
-        if(el) el.innerHTML = `<span>${user.public_repos}</span>`;
-      }
-      if (reposRes.ok) {
-        const repos = await reposRes.json();
-        const stars = repos.reduce((s, r) => s + r.stargazers_count, 0);
-        const el = document.getElementById('gh-stars');
-        if(el) el.innerHTML = `<span>${stars}</span>`;
-      }
-    } catch(e) {}
-
-    // Contribution graph via proxy público
-    try {
-      const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=last`);
-      if (!res.ok) throw new Error('api error');
-      const data = await res.json();
-
-      const contributions = data.contributions || [];
-
-      // calcular total e maior sequência
-      let total = 0, streak = 0, maxStreak = 0, cur = 0;
-      contributions.forEach(d => {
-        total += d.count;
-        if (d.count > 0) { cur++; maxStreak = Math.max(maxStreak, cur); }
-        else { cur = 0; }
-      });
-
-      const elC = document.getElementById('gh-commits');
-      const elS = document.getElementById('gh-streak');
-      if(elC) elC.innerHTML = `<span>${total}</span>`;
-      if(elS) elS.innerHTML = `<span>${maxStreak}</span>`;
-
-      renderGraph(contributions);
-    } catch(e) {
-      document.getElementById('gh-graph-container').innerHTML =
-        '<div class="gh-error">Não foi possível carregar a atividade.<br>Verifique se o GitHub username está correto.</div>';
-    }
-  }
-
-  function renderGraph(contributions) {
-    // agrupar por semana (col = semana, row = dia da semana 0=Dom)
-    const weeks = [];
-    let week = [];
-    // encontrar primeiro domingo antes da primeira data
-    contributions.forEach((day, i) => {
-      const dow = new Date(day.date).getDay(); // 0=Dom
-      if (i === 0) {
-        // preencher dias antes do início
-        for (let p = 0; p < dow; p++) week.push(null);
-      }
-      week.push(day);
-      if (week.length === 7) { weeks.push(week); week = []; }
-    });
-    if (week.length) {
-      while (week.length < 7) week.push(null);
-      weeks.push(week);
-    }
-
-    // calcular nível (0-4) baseado em quartis
-    const counts = contributions.map(d => d.count).filter(c => c > 0).sort((a,b)=>a-b);
-    const q1 = counts[Math.floor(counts.length * .25)] || 1;
-    const q2 = counts[Math.floor(counts.length * .50)] || 2;
-    const q3 = counts[Math.floor(counts.length * .75)] || 4;
-    const level = c => c === 0 ? 0 : c <= q1 ? 1 : c <= q2 ? 2 : c <= q3 ? 3 : 4;
-
-    // mês labels
-    const monthNames = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    let lastMonth = -1;
-    const monthRow = document.createElement('div');
-    monthRow.className = 'gh-months';
-
-    const grid = document.createElement('div');
-    grid.className = 'gh-grid';
-
-    weeks.forEach((week, wi) => {
-      // mês label
-      const firstReal = week.find(d => d);
-      const month = firstReal ? new Date(firstReal.date).getMonth() : -1;
-      const lbl = document.createElement('div');
-      lbl.className = 'gh-month-label';
-      if (month !== lastMonth && firstReal) {
-        lbl.textContent = monthNames[month];
-        lastMonth = month;
-      }
-      monthRow.appendChild(lbl);
-
-      const col = document.createElement('div');
-      col.className = 'gh-col';
-      week.forEach(day => {
-        const cell = document.createElement('div');
-        cell.className = 'gh-cell';
-        if (day) {
-          const lv = level(day.count);
-          cell.dataset.level = lv;
-          cell.dataset.date  = day.date;
-          cell.dataset.count = day.count;
-        } else {
-          cell.style.visibility = 'hidden';
-        }
-        col.appendChild(cell);
-      });
-      grid.appendChild(col);
-    });
-
-    const scroll = document.createElement('div');
-    scroll.className = 'gh-grid-scroll';
-
-    const inner = document.createElement('div');
-    inner.appendChild(monthRow);
-    inner.appendChild(grid);
-    scroll.appendChild(inner);
-
-    document.getElementById('gh-graph-container').innerHTML = '';
-    document.getElementById('gh-graph-container').appendChild(scroll);
-
-    // scroll para o fim (mais recente)
-    requestAnimationFrame(() => { scroll.scrollLeft = scroll.scrollWidth; });
-
-    // tooltip
-    const tooltip = document.getElementById('gh-tooltip');
-    document.querySelectorAll('.gh-cell[data-date]').forEach(cell => {
-      cell.addEventListener('mouseenter', e => {
-        const d = new Date(cell.dataset.date + 'T12:00:00');
-        const fmt = d.toLocaleDateString('pt-BR', { weekday:'short', day:'numeric', month:'short' });
-        const c = parseInt(cell.dataset.count);
-        tooltip.textContent = c === 0 ? `Sem contribuições · ${fmt}` : `${c} contribuição${c>1?'s':''} · ${fmt}`;
-        tooltip.classList.add('show');
-      });
-      cell.addEventListener('mousemove', e => {
-        tooltip.style.left = (e.clientX + 14) + 'px';
-        tooltip.style.top  = (e.clientY - 36) + 'px';
-      });
-      cell.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
-    });
-
-    // animação de entrada escalonada
-    const cells = document.querySelectorAll('.gh-cell');
-    cells.forEach((c, i) => {
-      c.style.opacity = '0';
-      c.style.transition = `opacity .4s ${(i % 52) * 8}ms`;
-      requestAnimationFrame(() => requestAnimationFrame(() => c.style.opacity = '1'));
-    });
-  }
-
-  loadGithub();
 
 </script>
 </body>
