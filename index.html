@@ -61,7 +61,7 @@
     .hero-scroll { position:absolute;bottom:40px;left:48px;display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;animation:fadeUp .6s .5s ease both; }
     .scroll-line { width:40px;height:1px;background:linear-gradient(90deg,var(--accent),transparent); }
     .hero-float { position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:16px;animation:fadeLeft .8s .4s ease both; }
-    @media(max-width:1100px){.hero-float{display:none;}} @media(max-width:900px){.hero-float{display:none;}}
+    @media(max-width:900px){.hero-float{display:none;}}
     .float-card { background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:20px 24px;min-width:200px;backdrop-filter:blur(10px);transition:transform .3s,box-shadow .3s; }
     .float-card:hover { transform:translateY(-4px) rotate(0deg)!important;box-shadow:0 12px 40px rgba(0,0,0,.4); }
     .float-card:first-child { transform:rotate(-2deg); }
@@ -311,14 +311,12 @@
     /* ── FORMA GEOMÉTRICA 3D ── */
     .geo-wrap {
       position: absolute;
-      right: 80px; top: 50%;
-      transform: translateY(-50%);
-      width: 260px; height: 260px;
-      perspective: 800px;
-      z-index: 0;
+      bottom: 32px; right: 48px;
+      width: 220px; height: 220px;
+      perspective: 700px;
       pointer-events: none;
     }
-    @media(max-width:1100px){ .geo-wrap { display:none; } }
+    @media(max-width:768px){ .geo-wrap { display:none; } }
 
     .geo-scene {
       width: 100%; height: 100%;
@@ -330,51 +328,42 @@
       from { transform: rotateX(20deg) rotateY(0deg) rotateZ(8deg); }
       to   { transform: rotateX(20deg) rotateY(360deg) rotateZ(8deg); }
     }
-
-    /* cubo — 6 faces */
     .geo-face {
       position: absolute;
-      width: 160px; height: 160px;
-      left: 50px; top: 50px;
+      width: 130px; height: 130px;
+      left: 45px; top: 45px;
       border: 1.5px solid rgba(79,142,247,.5);
       background: rgba(79,142,247,.04);
-      backdrop-filter: blur(2px);
     }
-    .geo-face.front  { transform: translateZ(80px); }
-    .geo-face.back   { transform: rotateY(180deg) translateZ(80px); }
-    .geo-face.left   { transform: rotateY(-90deg) translateZ(80px); }
-    .geo-face.right  { transform: rotateY(90deg)  translateZ(80px); }
-    .geo-face.top    { transform: rotateX(90deg)  translateZ(80px); }
-    .geo-face.bottom { transform: rotateX(-90deg) translateZ(80px); }
-
-    /* arestas brilhantes em cada face */
     .geo-face::before {
       content: '';
       position: absolute; inset: -1px;
-      background: linear-gradient(135deg, rgba(79,142,247,.3) 0%, transparent 50%, rgba(126,184,247,.15) 100%);
-      pointer-events: none;
+      background: linear-gradient(135deg, rgba(79,142,247,.25) 0%, transparent 50%, rgba(126,184,247,.1) 100%);
     }
+    .geo-face.front  { transform: translateZ(65px); }
+    .geo-face.back   { transform: rotateY(180deg) translateZ(65px); }
+    .geo-face.left   { transform: rotateY(-90deg) translateZ(65px); }
+    .geo-face.right  { transform: rotateY(90deg)  translateZ(65px); }
+    .geo-face.top    { transform: rotateX(90deg)  translateZ(65px); }
+    .geo-face.bottom { transform: rotateX(-90deg) translateZ(65px); }
 
-    /* ponto de luz central */
     .geo-core {
       position: absolute;
-      width: 12px; height: 12px;
+      width: 10px; height: 10px;
       left: 50%; top: 50%;
       transform: translate(-50%,-50%);
       background: var(--accent);
       border-radius: 50%;
-      box-shadow: 0 0 20px 6px rgba(79,142,247,.4), 0 0 60px 20px rgba(79,142,247,.15);
+      box-shadow: 0 0 18px 5px rgba(79,142,247,.45), 0 0 50px 16px rgba(79,142,247,.15);
       animation: corePulse 3s ease-in-out infinite;
     }
     @keyframes corePulse {
-      0%,100% { box-shadow: 0 0 20px 6px rgba(79,142,247,.4), 0 0 60px 20px rgba(79,142,247,.15); }
-      50%      { box-shadow: 0 0 30px 10px rgba(79,142,247,.6), 0 0 80px 30px rgba(79,142,247,.2); }
+      0%,100% { box-shadow: 0 0 18px 5px rgba(79,142,247,.45), 0 0 50px 16px rgba(79,142,247,.15); }
+      50%      { box-shadow: 0 0 26px 8px rgba(79,142,247,.65), 0 0 70px 24px rgba(79,142,247,.22); }
     }
-
-    /* anel orbital ao redor do cubo */
     .geo-ring {
       position: absolute;
-      width: 220px; height: 220px;
+      width: 190px; height: 190px;
       left: 50%; top: 50%;
       transform: translate(-50%,-50%) rotateX(75deg);
       border-radius: 50%;
@@ -385,26 +374,23 @@
     .geo-ring::after {
       content: '';
       position: absolute;
-      width: 8px; height: 8px;
+      width: 7px; height: 7px;
       background: var(--accent2);
       border-radius: 50%;
-      top: -4px; left: 50%;
+      top: -3px; left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 0 10px 3px rgba(126,184,247,.5);
+      box-shadow: 0 0 8px 3px rgba(126,184,247,.5);
     }
     @keyframes ringDrift {
       from { transform: translate(-50%,-50%) rotateX(75deg) rotateZ(0deg); }
       to   { transform: translate(-50%,-50%) rotateX(75deg) rotateZ(360deg); }
     }
-
-    /* segundo anel inclinado diferente */
     .geo-ring-2 {
       position: absolute;
-      width: 240px; height: 240px;
+      width: 205px; height: 205px;
       left: 50%; top: 50%;
-      transform: translate(-50%,-50%) rotateX(75deg) rotateZ(60deg);
       border-radius: 50%;
-      border: 1px dashed rgba(79,142,247,.12);
+      border: 1px dashed rgba(79,142,247,.1);
       animation: ringDrift2 20s linear infinite;
       will-change: transform;
     }
@@ -459,7 +445,7 @@
         <div class="fc-sub">TP · Claro · OBInvest · Innolevels · AZSEC</div>
       </div>
     </div>
-
+    <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
     <!-- FORMA GEOMÉTRICA -->
     <div class="geo-wrap">
       <div class="geo-ring-2"></div>
@@ -474,8 +460,6 @@
       </div>
       <div class="geo-core"></div>
     </div>
-
-    <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
   </div>
 </section>
 
