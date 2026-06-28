@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Miguel Freitas — Desenvolvedor Front-end</title>
+  <title>Miguel Freitas — Desenvolvedor Fullstack</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -398,6 +398,20 @@
       from { transform: translate(-50%,-50%) rotateX(55deg) rotateZ(60deg); }
       to   { transform: translate(-50%,-50%) rotateX(55deg) rotateZ(420deg); }
     }
+
+    /* ── LANG SWITCHER ── */
+    .lang-switcher { display:flex;align-items:center;gap:6px; }
+    .lang-btn {
+      background:transparent;border:1px solid var(--border);
+      color:var(--muted);font-family:'DM Sans',sans-serif;
+      font-size:.75rem;font-weight:600;padding:5px 10px;
+      border-radius:6px;cursor:none;
+      transition:color .2s,border-color .2s,background .2s;
+      letter-spacing:.04em;
+    }
+    .lang-btn:hover { color:var(--text);border-color:rgba(79,142,247,.4); }
+    .lang-btn.active { background:rgba(79,142,247,.12);border-color:rgba(79,142,247,.35);color:var(--accent); }
+    .lang-sep { color:var(--border);font-size:.7rem; }
   </style>
 </head>
 <body>
@@ -410,22 +424,29 @@
   <a href="#hero" class="nav-logo">MF<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projetos</a></li>
-    <li><a href="#experience">Experiência</a></li>
-    <li><a href="#contact">Contato</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">Projetos</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Experiência</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Fale comigo</a>
+  <div class="lang-switcher" id="langSwitcher">
+    <button class="lang-btn active" data-lang="pt">PT</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="es">ES</button>
+  </div>
+  <a href="#contact" class="nav-cta" data-i18n="nav.cta">Fale comigo</a>
 </nav>
 
 <section id="hero">
   <div class="inner">
     <div class="hero-content">
-      <div class="hero-badge">Disponível para novas oportunidades</div>
+      <div class="hero-badge" data-i18n="hero.badge">Disponível para novas oportunidades</div>
       <h1>Miguel<br><span class="line2">Freitas.</span></h1>
-      <p class="hero-sub">Desenvolvedor Front-end com 2 anos de experiência construindo interfaces para <strong>Teleperformance</strong> e <strong>Claro</strong>.<br> HTML · CSS · JS · Bootstrap · WordPress e mais.</p>
+      <p class="hero-sub" data-i18n-html="hero.sub">Desenvolvedor Fullstack com 2 anos de experiência construindo interfaces para <strong>Teleperformance</strong> e <strong>Claro</strong>.<br> HTML · CSS · JS · Bootstrap · WordPress e mais.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn-primary">Ver projetos →</a>
-        <a href="mailto:miguel.frtas@gmail.com" class="btn-ghost">✉ Contato</a>
+        <a href="#projects" class="btn-primary" data-i18n="hero.btn_projects">Ver projetos →</a>
+        <a href="mailto:miguel.frtas@gmail.com" class="btn-ghost" data-i18n="hero.btn_contact">✉ Contato</a>
         <a href="https://www.linkedin.com/in/miguelrfreitas/" target="_blank" class="btn-ghost-logos">
           <svg class="logos" viewBox="0 -0.5 25 25" xmlns="http://www.w3.org/2000/svg">
             <path d="m12.301 0h.093c2.242 0 4.34.613 6.137 1.68l-.055-.031c1.871 1.094 3.386 2.609 4.449 4.422l.031.058c1.04 1.769 1.654 3.896 1.654 6.166 0 5.406-3.483 10-8.327 11.658l-.087.026c-.063.02-.135.031-.209.031-.162 0-.312-.054-.433-.144l.002.001c-.128-.115-.208-.281-.208-.466 0-.005 0-.01 0-.014v.001q0-.048.008-1.226t.008-2.154c.007-.075.011-.161.011-.249 0-.792-.323-1.508-.844-2.025.618-.061 1.176-.163 1.718-.305l-.076.017c.573-.16 1.073-.373 1.537-.642l-.031.017c.508-.28.938-.636 1.292-1.058l.006-.007c.372-.476.663-1.036.84-1.645l.009-.035c.209-.683.329-1.468.329-2.281 0-.045 0-.091-.001-.136v.007c0-.022.001-.047.001-.072 0-1.248-.482-2.383-1.269-3.23l.003.003c.168-.44.265-.948.265-1.479 0-.649-.145-1.263-.404-1.814l.011.026c-.115-.022-.246-.035-.381-.035-.334 0-.649.078-.929.216l.012-.005c-.568.21-1.054.448-1.512.726l.038-.022-.609.384c-.922-.264-1.981-.416-3.075-.416s-2.153.152-3.157.436l.081-.02q-.256-.176-.681-.433c-.373-.214-.814-.421-1.272-.595l-.066-.022c-.293-.154-.64-.244-1.009-.244-.124 0-.246.01-.364.03l.013-.002c-.248.524-.393 1.139-.393 1.788 0 .531.097 1.04.275 1.509l-.01-.029c-.785.844-1.266 1.979-1.266 3.227 0 .025 0 .051.001.076v-.004c-.001.039-.001.084-.001.13 0 .809.12 1.591.344 2.327l-.015-.057c.189.643.476 1.202.85 1.693l-.009-.013c.354.435.782.793 1.267 1.062l.022.011c.432.252.933.465 1.46.614l.046.011c.466.125 1.024.227 1.595.284l.046.004c-.431.428-.718 1-.784 1.638l-.001.012c-.207.101-.448.183-.699.236l-.021.004c-.256.051-.549.08-.85.08-.022 0-.044 0-.066 0h.003c-.394-.008-.756-.136-1.055-.348l.006.004c-.371-.259-.671-.595-.881-.986l-.007-.015c-.198-.336-.459-.614-.768-.827l-.009-.006c-.225-.169-.49-.301-.776-.38l-.016-.004-.32-.048c-.023-.002-.05-.003-.077-.003-.14 0-.273.028-.394.077l.007-.003q-.128.072-.08.184c.039.086.087.16.145.225l-.001-.001c.061.072.13.135.205.19l.003.002.112.08c.283.148.516.354.693.603l.004.006c.191.237.359.505.494.792l.01.024.16.368c.135.402.38.738.7.981l.005.004c.3.234.662.402 1.057.478l.016.002c.33.064.714.104 1.106.112h.007c.045.002.097.002.15.002.261 0 .517-.021.767-.062l-.027.004.368-.064q0 .609.008 1.418t.008.873v.014c0 .185-.08.351-.208.466h-.001c-.119.089-.268.143-.431.143-.075 0-.147-.011-.214-.032l.005.001c-4.929-1.689-8.409-6.283-8.409-11.69 0-2.268.612-4.393 1.681-6.219l-.032.058c1.094-1.871 2.609-3.386 4.422-4.449l.058-.031c1.739-1.034 3.835-1.645 6.073-1.645h.098-.005zm-7.64 17.666q.048-.112-.112-.192-.16-.048-.208.032-.048.112.112.192.144.096.208-.032zm.497.545q.112-.08-.032-.256-.16-.144-.256-.048-.112.08.032.256.159.157.256.047zm.48.72q.144-.112 0-.304-.128-.208-.272-.096-.144.08 0 .288t.272.112zm.672.673q.128-.128-.064-.304-.192-.192-.32-.048-.144.128.064.304.192.192.32.044zm.913.4q.048-.176-.208-.256-.24-.064-.304.112t.208.24q.24.097.304-.096zm1.009.08q0-.208-.272-.176-.256 0-.256.176 0 .208.272.176.256.001.256-.175zm.929-.16q-.032-.176-.288-.144-.256.048-.224.24t.288.128.225-.224z"/>
@@ -435,17 +456,17 @@
     </div>
     <div class="hero-float">
       <div class="float-card">
-        <div class="fc-label">Experiência</div>
-        <div class="fc-value"><span>2</span>+ anos</div>
-        <div class="fc-sub">Dev Front-end</div>
+        <div class="fc-label" data-i18n="hero.card1_label">Experiência</div>
+        <div class="fc-value"><span>2</span>+ <span data-i18n="hero.card1_years">anos</span></div>
+        <div class="fc-sub" data-i18n="hero.card1_sub">Dev Front-end</div>
       </div>
       <div class="float-card">
-        <div class="fc-label">Clientes</div>
+        <div class="fc-label" data-i18n="hero.card2_label">Clientes</div>
         <div class="fc-value"><span>5</span></div>
         <div class="fc-sub">TP · Claro · OBInvest · Innolevels · AZSEC</div>
       </div>
     </div>
-    <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
+    <div class="hero-scroll"><div class="scroll-line"></div><span data-i18n="hero.scroll">scroll</span></div>
     <!-- FORMA GEOMÉTRICA -->
     <div class="geo-wrap">
       <div class="geo-ring-2"></div>
@@ -465,59 +486,59 @@
 
 <section id="skills">
   <div class="inner">
-    <div class="reveal"><div class="section-tag">// stack técnico</div></div>
-    <h2 class="reveal reveal-delay-1">Habilidades</h2>
+    <div class="reveal"><div class="section-tag" data-i18n="skills.tag">// stack técnico</div></div>
+    <h2 class="reveal reveal-delay-1" data-i18n="skills.title">Habilidades</h2>
 
     <div class="reveal reveal-delay-2">
       <div class="tabs-nav" id="tabsNav">
         <div class="tabs-pill" id="tabsPill"></div>
-        <button class="tab-btn active" data-tab="frontend"><span class="tab-dot"></span>Front-end</button>
-        <button class="tab-btn" data-tab="backend"><span class="tab-dot"></span>Back-end</button>
-        <button class="tab-btn" data-tab="cms"><span class="tab-dot"></span>CMS</button>
-        <button class="tab-btn" data-tab="tools"><span class="tab-dot"></span>Ferramentas</button>
-        <button class="tab-btn" data-tab="soft"><span class="tab-dot"></span>Soft Skills</button>
+        <button class="tab-btn active" data-tab="frontend"><span class="tab-dot"></span><span data-i18n="tab.frontend">Front-end</span></button>
+        <button class="tab-btn" data-tab="backend"><span class="tab-dot"></span><span data-i18n="tab.backend">Back-end</span></button>
+        <button class="tab-btn" data-tab="cms"><span class="tab-dot"></span><span data-i18n="tab.cms">CMS</span></button>
+        <button class="tab-btn" data-tab="tools"><span class="tab-dot"></span><span data-i18n="tab.tools">Ferramentas</span></button>
+        <button class="tab-btn" data-tab="soft"><span class="tab-dot"></span><span data-i18n="tab.soft">Soft Skills</span></button>
       </div>
 
       <div class="tabs-panels">
         <div class="tab-panel active" data-panel="frontend">
           <div class="skills-grid">
-            <div class="skill-chip"><span class="skill-icon">🌐</span><span class="skill-name">HTML5</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🎨</span><span class="skill-name">CSS3</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">⚡</span><span class="skill-name">JavaScript</span><span class="skill-level">Intermediário · 75%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:75%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🅱️</span><span class="skill-name">Bootstrap</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">💨</span><span class="skill-name">Tailwind</span><span class="skill-level">Intermediário · 65%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:65%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🎭</span><span class="skill-name">Figma</span><span class="skill-level">Intermediário · 70%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:70%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🌐</span><span class="skill-name">HTML5</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🎨</span><span class="skill-name">CSS3</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">⚡</span><span class="skill-name">JavaScript</span><span class="skill-level"><span data-i18n="level.intermediate">Intermediário</span> · 75%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:75%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🅱️</span><span class="skill-name">Bootstrap</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">💨</span><span class="skill-name">Tailwind</span><span class="skill-level"><span data-i18n="level.intermediate">Intermediário</span> · 65%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:65%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🎭</span><span class="skill-name">Figma</span><span class="skill-level"><span data-i18n="level.intermediate">Intermediário</span> · 70%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:70%"></div></div></div>
           </div>
         </div>
         <div class="tab-panel" data-panel="backend">
           <div class="skills-grid">
-            <div class="skill-chip"><span class="skill-icon">🐘</span><span class="skill-name">PHP</span><span class="skill-level">Básico · 55%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:55%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🔷</span><span class="skill-name">C# / Razor</span><span class="skill-level">Básico · 45%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:45%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🐍</span><span class="skill-name">Python</span><span class="skill-level">Básico · 40%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:40%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🗃️</span><span class="skill-name">Oracle SQL</span><span class="skill-level">Básico · 40%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:40%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🐘</span><span class="skill-name">PHP</span><span class="skill-level"><span data-i18n="level.basic">Básico</span> · 55%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:55%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🔷</span><span class="skill-name">C# / Razor</span><span class="skill-level"><span data-i18n="level.basic">Básico</span> · 45%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:45%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🐍</span><span class="skill-name">Python</span><span class="skill-level"><span data-i18n="level.basic">Básico</span> · 40%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:40%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🗃️</span><span class="skill-name">Oracle SQL</span><span class="skill-level"><span data-i18n="level.basic">Básico</span> · 40%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:40%"></div></div></div>
           </div>
         </div>
         <div class="tab-panel" data-panel="cms">
           <div class="skills-grid">
-            <div class="skill-chip"><span class="skill-icon">🌿</span><span class="skill-name">WordPress</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🍃</span><span class="skill-name">Umbraco</span><span class="skill-level">Avançado · 75%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:75%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🌿</span><span class="skill-name">WordPress</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🍃</span><span class="skill-name">Umbraco</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 75%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:75%"></div></div></div>
           </div>
         </div>
         <div class="tab-panel" data-panel="tools">
           <div class="skills-grid">
-            <div class="skill-chip"><span class="skill-icon">🔀</span><span class="skill-name">Git / GitHub</span><span class="skill-level">Intermediário · 70%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:70%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">📐</span><span class="skill-name">Figma</span><span class="skill-level">Intermediário · 70%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:70%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🔵</span><span class="skill-name">VS Code</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🌐</span><span class="skill-name">Chrome DevTools</span><span class="skill-level">Avançado · 88%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:88%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🔀</span><span class="skill-name">Git / GitHub</span><span class="skill-level"><span data-i18n="level.intermediate">Intermediário</span> · 70%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:70%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">📐</span><span class="skill-name">Figma</span><span class="skill-level"><span data-i18n="level.intermediate">Intermediário</span> · 70%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:70%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🔵</span><span class="skill-name">VS Code</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🌐</span><span class="skill-name">Chrome DevTools</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 88%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:88%"></div></div></div>
           </div>
         </div>
         <div class="tab-panel" data-panel="soft">
           <div class="skills-grid">
-            <div class="skill-chip"><span class="skill-icon">🔄</span><span class="skill-name">Scrum</span><span class="skill-level">Avançado · 85%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:85%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">📋</span><span class="skill-name">Kanban</span><span class="skill-level">Avançado · 85%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:85%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">🤝</span><span class="skill-name">Trabalho em time</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">💬</span><span class="skill-name">Comunicação</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
-            <div class="skill-chip"><span class="skill-icon">📈</span><span class="skill-name">Melhoria contínua</span><span class="skill-level">Avançado · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🔄</span><span class="skill-name">Scrum</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 85%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:85%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">📋</span><span class="skill-name">Kanban</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 85%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:85%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">🤝</span><span class="skill-name" data-i18n="soft.teamwork">Trabalho em time</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">💬</span><span class="skill-name" data-i18n="soft.communication">Comunicação</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
+            <div class="skill-chip"><span class="skill-icon">📈</span><span class="skill-name" data-i18n="soft.improvement">Melhoria contínua</span><span class="skill-level"><span data-i18n="level.advanced">Avançado</span> · 100%</span><div class="skill-bar"><div class="skill-bar-fill" style="--level:100%"></div></div></div>
           </div>
         </div>
       </div>
@@ -527,34 +548,34 @@
 
 <section id="projects">
   <div class="inner">
-    <div class="reveal"><div class="section-tag">// portfólio</div></div>
-    <h2 class="reveal reveal-delay-1">Projetos</h2>
+    <div class="reveal"><div class="section-tag" data-i18n="projects.tag">// portfólio</div></div>
+    <h2 class="reveal reveal-delay-1" data-i18n="projects.title">Projetos</h2>
     <div class="projects-grid">
       <div class="project-card reveal">
         <div class="project-thumb thumb-innolevels">🏢</div>
         <div class="project-body">
           <div class="project-tags"><span class="tag">WordPress</span><span class="tag">PHP</span><span class="tag">JavaScript</span></div>
-          <div class="project-title">Site Innolevels + Portal de Vagas</div>
-          <p class="project-desc">Reformulação completa do site institucional e criação de portal de vagas do zero, com WordPress, PHP, HTML/CSS e JS. Responsivo e fiel ao Figma.</p>
-          <a href="https://www.innolevels.com.br" target="_blank" class="project-link">Ver site →</a>
+          <div class="project-title" data-i18n="proj1.title">Site Innolevels + Portal de Vagas</div>
+          <p class="project-desc" data-i18n="proj1.desc">Reformulação completa do site institucional e criação de portal de vagas do zero, com WordPress, PHP, HTML/CSS e JS. Responsivo e fiel ao Figma.</p>
+          <a href="https://www.innolevels.com.br" target="_blank" class="project-link" data-i18n="proj.view_site">Ver site →</a>
         </div>
       </div>
       <div class="project-card reveal reveal-delay-1">
         <div class="project-thumb thumb-estudos">💡</div>
         <div class="project-body">
-          <div class="project-tags"><span class="tag green">Em breve</span><span class="tag">HTML/CSS</span><span class="tag">JS</span></div>
-          <div class="project-title">Projetos Pessoais</div>
-          <p class="project-desc">Estudos e experimentos de UI, componentes interativos e projetos pessoais. Em breve com links para o GitHub.</p>
-          <a href="#contact" class="project-link">Me contate →</a>
+          <div class="project-tags"><span class="tag green" data-i18n="tag.soon">Em breve</span><span class="tag">HTML/CSS</span><span class="tag">JS</span></div>
+          <div class="project-title" data-i18n="proj2.title">Projetos Pessoais</div>
+          <p class="project-desc" data-i18n="proj2.desc">Estudos e experimentos de UI, componentes interativos e projetos pessoais. Em breve com links para o GitHub.</p>
+          <a href="#contact" class="project-link" data-i18n="proj.contact_me">Me contate →</a>
         </div>
       </div>
       <div class="project-card reveal reveal-delay-2">
         <div class="project-thumb thumb-soon">🚀</div>
         <div class="project-body">
-          <div class="project-tags"><span class="tag green">Em breve</span></div>
-          <div class="project-title">Novo projeto chegando</div>
-          <p class="project-desc">Trabalhando em um novo projeto para adicionar ao portfólio. Volte em breve ou entre em contato.</p>
-          <a href="#contact" class="project-link">Fale comigo →</a>
+          <div class="project-tags"><span class="tag green" data-i18n="tag.soon">Em breve</span></div>
+          <div class="project-title" data-i18n="proj3.title">Novo projeto chegando</div>
+          <p class="project-desc" data-i18n="proj3.desc">Trabalhando em um novo projeto para adicionar ao portfólio. Volte em breve ou entre em contato.</p>
+          <a href="#contact" class="project-link" data-i18n="proj.talk_to_me">Fale comigo →</a>
         </div>
       </div>
     </div>
@@ -563,44 +584,44 @@
 
 <section id="experience">
   <div class="inner">
-    <div class="reveal"><div class="section-tag">// trajetória</div></div>
-    <h2 class="reveal reveal-delay-1">Experiência</h2>
+    <div class="reveal"><div class="section-tag" data-i18n="experience.tag">// trajetória</div></div>
+    <h2 class="reveal reveal-delay-1" data-i18n="experience.title">Experiência</h2>
     <div class="exp-list">
 
       <div class="exp-item reveal" data-modal="controlid">
         <div>
           <div class="exp-company">Control iD</div>
-          <div class="exp-role">Técnico de Controle de Acesso</div>
-          <p class="exp-desc">Configuração e manutenção de equipamentos de reconhecimento facial e RFID. Diagnóstico de falhas e suporte técnico em ambientes corporativos.</p>
+          <div class="exp-role" data-i18n="exp.controlid.role">Técnico de Controle de Acesso</div>
+          <p class="exp-desc" data-i18n="exp.controlid.desc">Configuração e manutenção de equipamentos de reconhecimento facial e RFID. Diagnóstico de falhas e suporte técnico em ambientes corporativos.</p>
         </div>
         <div class="exp-meta">
-          <div class="exp-period">dez/2025 — atual</div>
-          <div class="exp-more">Ver detalhes →</div>
+          <div class="exp-period" data-i18n="exp.controlid.period">dez/2025 — atual</div>
+          <div class="exp-more" data-i18n="exp.see_details">Ver detalhes →</div>
         </div>
       </div>
 
       <div class="exp-item reveal reveal-delay-1" data-modal="innolevels">
         <div>
           <div class="exp-company">Innolevels</div>
-          <div class="exp-role">Estagiário Front-end</div>
-          <p class="exp-desc">Reformulação completa do site institucional com WordPress e PHP. Alocado em clientes enterprise com deploys, code review, Umbraco CMS e back-end.</p>
+          <div class="exp-role" data-i18n="exp.innolevels.role">Estagiário Fullstack</div>
+          <p class="exp-desc" data-i18n="exp.innolevels.desc">Reformulação completa do site institucional com WordPress e PHP. Alocado em clientes enterprise com deploys, code review, Umbraco CMS e back-end.</p>
           <div class="exp-clients"><span class="exp-client">📲 Teleperformance</span><span class="exp-client">📡 Claro</span></div>
         </div>
         <div class="exp-meta">
-          <div class="exp-period">out/2023 — nov/2025</div>
-          <div class="exp-more">Ver detalhes →</div>
+          <div class="exp-period" data-i18n="exp.innolevels.period">out/2023 — nov/2025</div>
+          <div class="exp-more" data-i18n="exp.see_details">Ver detalhes →</div>
         </div>
       </div>
 
       <div class="exp-item reveal reveal-delay-2" data-modal="obinvest">
         <div>
           <div class="exp-company">OBInvest</div>
-          <div class="exp-role">Estagiário Front-end</div>
-          <p class="exp-desc">Manutenção do site institucional com HTML, CSS e GitHub. Colaboração com equipe UX/UI e automações em Python (Selenium + SMTP).</p>
+          <div class="exp-role" data-i18n="exp.obinvest.role">Estagiário Fullstack</div>
+          <p class="exp-desc" data-i18n="exp.obinvest.desc">Manutenção do site institucional com HTML, CSS e GitHub. Colaboração com equipe UX/UI e automações em Python (Selenium + SMTP).</p>
         </div>
         <div class="exp-meta">
-          <div class="exp-period">mai/2023 — out/2023</div>
-          <div class="exp-more">Ver detalhes →</div>
+          <div class="exp-period" data-i18n="exp.obinvest.period">mai/2023 — out/2023</div>
+          <div class="exp-more" data-i18n="exp.see_details">Ver detalhes →</div>
         </div>
       </div>
 
@@ -615,7 +636,7 @@
   </div>
 </div>
 
-<template id="tpl-controlid">
+<template id="tpl-controlid" data-lang="pt">
   <div class="modal-header">
     <div>
       <div class="modal-company">Control iD</div>
@@ -646,7 +667,7 @@
   <div class="modal-header">
     <div>
       <div class="modal-company">Innolevels</div>
-      <div class="modal-role">Estagiário Front-end</div>
+      <div class="modal-role">Estagiário Fullstack</div>
       <div class="modal-period">out/2023 — nov/2025 · 2 anos · Rio de Janeiro, RJ</div>
     </div>
     <div class="modal-badge modal-badge--blue">2 anos</div>
@@ -661,14 +682,14 @@
   </ul>
   <div class="modal-section-title modal-section-title--gap">Alocação — Teleperformance (TP)</div>
   <ul class="modal-list">
-    <li>Desenvolvimento e evolução de módulos front-end no portal de vagas da TP, utilizado por milhares de candidatos.</li>
+    <li>Desenvolvimento e evolução de módulos fullstack no portal de vagas da TP, utilizado por milhares de candidatos.</li>
     <li>Gerenciamento de conteúdo e componentes via Umbraco CMS.</li>
     <li>Participação em deploys e validação de entregas em ambiente de produção.</li>
     <li>Atendimento de chamados via chat, resolvendo problemas técnicos de candidatos em tempo real.</li>
   </ul>
   <div class="modal-section-title modal-section-title--gap">Alocação — Claro</div>
   <ul class="modal-list">
-    <li>Desenvolvimento front-end com participação ativa em dailys, planning e code review.</li>
+    <li>Desenvolvimento fullstack com participação ativa em dailys, planning e code review.</li>
     <li>Atuação pontual em back-end, colaborando com a equipe no desenvolvimento de funcionalidades.</li>
     <li>Padronização de componentes visuais e ajustes de UI em ambiente CMS.</li>
   </ul>
@@ -711,9 +732,9 @@
 <section id="contact">
   <div class="contact-glow"></div>
   <div class="inner reveal">
-    <div class="section-tag">// vamos conversar</div>
-    <h2>Contato</h2>
-    <p class="contact-sub">Aberto a oportunidades de estágio e júnior em front-end. Pode me chamar!</p>
+    <div class="section-tag" data-i18n="contact.tag">// vamos conversar</div>
+    <h2 data-i18n="contact.title">Contato</h2>
+    <p class="contact-sub" data-i18n="contact.sub">Aberto a oportunidades de estágio e júnior em front-end ou fullstack. Pode me chamar!</p>
     <div class="contact-links">
       <a href="mailto:miguel.frtas@gmail.com" class="contact-link">✉ miguel.frtas@gmail.com</a>
       <a href="tel:+5521983690856" class="contact-link">📱 (21) 98369-0856</a>
@@ -728,8 +749,8 @@
 </section>
 
 <footer>
-  <span>© 2025 Miguel Rodrigues Freitas</span>
-  <span>Rio de Janeiro, RJ 🇧🇷</span>
+  <span data-i18n="footer.copy">© 2025 Miguel Rodrigues Freitas</span>
+  <span data-i18n="footer.location">Rio de Janeiro, RJ 🇧🇷</span>
 </footer>
 
 <script>
@@ -738,15 +759,11 @@
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
   (function anim(){
-    const nx=rx+(mx-rx)*.12, ny=ry+(my-ry)*.12;
-    if(Math.abs(nx-rx)>.1||Math.abs(ny-ry)>.1){
-      rx=nx;ry=ny;
-      ring.style.transform=`translate(calc(-50% + ${rx}px), calc(-50% + ${ry}px))`;
-    }
+    rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
     requestAnimationFrame(anim);
   })();
-  ring.style.left='0'; ring.style.top='0';
-  document.querySelectorAll('a,button,.skill-chip,.project-card,.exp-item').forEach(el=>{
+  document.querySelectorAll('a,button,.skill-chip,.project-card,.exp-item,.lang-btn').forEach(el=>{
     el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';cursor.style.width='6px';cursor.style.height='6px';});
     el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';cursor.style.width='10px';cursor.style.height='10px';});
   });
@@ -860,6 +877,230 @@
     });
   }, { threshold:.35 });
   sections.forEach(s => scrollSpy.observe(s));
+
+  // ══════════════════════════════════════════
+  // i18n — detecção automática de idioma
+  // ══════════════════════════════════════════
+  const translations = {
+    pt: {
+      'nav.projects':    'Projetos',
+      'nav.experience':  'Experiência',
+      'nav.contact':     'Contato',
+      'nav.cta':         'Fale comigo',
+      'hero.badge':      'Disponível para novas oportunidades',
+      'hero.sub':        'Desenvolvedor Fullstack com 2 anos de experiência construindo interfaces para <strong>Teleperformance</strong> e <strong>Claro</strong>.<br> HTML · CSS · JS · Bootstrap · WordPress e mais.',
+      'hero.btn_projects': 'Ver projetos →',
+      'hero.btn_contact':  '✉ Contato',
+      'hero.card1_label':  'Experiência',
+      'hero.card1_sub':    'Desenvolvedor Fullstack',
+      'hero.card2_label':  'Clientes',
+      'hero.scroll':       'scroll',
+      'skills.tag':        '// stack técnico',
+      'skills.title':      'Habilidades',
+      'projects.tag':      '// portfólio',
+      'projects.title':    'Projetos',
+      'experience.tag':    '// trajetória',
+      'experience.title':  'Experiência',
+      'contact.tag':       '// vamos conversar',
+      'contact.title':     'Contato',
+      'contact.sub':       'Aberto a oportunidades de estágio e júnior em front-end. Pode me chamar!',
+      'tab.frontend':      'Front-end',
+      'tab.backend':       'Back-end',
+      'tab.cms':           'CMS',
+      'tab.tools':         'Ferramentas',
+      'tab.soft':          'Soft Skills',
+      'proj1.title':       'Site Innolevels + Portal de Vagas',
+      'proj1.desc':        'Reformulação completa do site institucional e criação de portal de vagas do zero, com WordPress, PHP, HTML/CSS e JS. Responsivo e fiel ao Figma.',
+      'proj2.title':       'Projetos Pessoais',
+      'proj2.desc':        'Estudos e experimentos de UI, componentes interativos e projetos pessoais. Em breve com links para o GitHub.',
+      'proj3.title':       'Novo projeto chegando',
+      'proj3.desc':        'Trabalhando em um novo projeto para adicionar ao portfólio. Volte em breve ou entre em contato.',
+      'proj.view_site':    'Ver site →',
+      'proj.contact_me':   'Me contate →',
+      'proj.talk_to_me':   'Fale comigo →',
+      'exp.controlid.role':   'Técnico de Controle de Acesso',
+      'exp.controlid.desc':   'Configuração e manutenção de equipamentos de reconhecimento facial e RFID. Diagnóstico de falhas e suporte técnico em ambientes corporativos.',
+      'exp.controlid.period': 'dez/2025 — atual',
+      'exp.innolevels.role':  'Estagiário Fullstack',
+      'exp.innolevels.desc':  'Reformulação completa do site institucional com WordPress e PHP. Alocado em clientes enterprise com deploys, code review, Umbraco CMS e back-end.',
+      'exp.innolevels.period':'out/2023 — nov/2025',
+      'exp.obinvest.role':    'Estagiário Front-end',
+      'exp.obinvest.desc':    'Manutenção do site institucional com HTML, CSS e GitHub. Colaboração com equipe UX/UI e automações em Python (Selenium + SMTP).',
+      'exp.obinvest.period':  'mai/2023 — out/2023',
+      'exp.see_details':      'Ver detalhes →',
+      'footer.copy':          '© 2025 Miguel Rodrigues Freitas',
+      'footer.location':      'Rio de Janeiro, RJ 🇧🇷',
+      'level.advanced':       'Avançado',
+      'level.intermediate':   'Intermediário',
+      'level.basic':          'Básico',
+      'level.experienced':    'Experiente',
+      'tag.soon':             'Em breve',
+      'soft.teamwork':        'Trabalho em time',
+      'soft.communication':   'Comunicação',
+      'soft.improvement':     'Melhoria contínua',
+      'hero.card1_years':     'anos',
+    },
+    en: {
+      'nav.projects':    'Projects',
+      'nav.experience':  'Experience',
+      'nav.contact':     'Contact',
+      'nav.cta':         'Get in touch',
+      'hero.badge':      'Open to new opportunities',
+      'hero.sub':        'Fullstack Developer with 2 years of experience building interfaces for <strong>Teleperformance</strong> and <strong>Claro</strong>.<br> HTML · CSS · JS · Bootstrap · WordPress and more.',
+      'hero.btn_projects': 'View projects →',
+      'hero.btn_contact':  '✉ Contact',
+      'hero.card1_label':  'Experience',
+      'hero.card1_sub':    'Fullstack Dev',
+      'hero.card2_label':  'Clients',
+      'hero.scroll':       'scroll',
+      'skills.tag':        '// tech stack',
+      'skills.title':      'Skills',
+      'projects.tag':      '// portfolio',
+      'projects.title':    'Projects',
+      'experience.tag':    '// career',
+      'experience.title':  'Experience',
+      'contact.tag':       "// let's talk",
+      'contact.title':     'Contact',
+      'contact.sub':       'Open to internship and junior front-end opportunities. Feel free to reach out!',
+      'tab.frontend':      'Front-end',
+      'tab.backend':       'Back-end',
+      'tab.cms':           'CMS',
+      'tab.tools':         'Tools',
+      'tab.soft':          'Soft Skills',
+      'proj1.title':       'Innolevels Site + Job Portal',
+      'proj1.desc':        'Full redesign of the company website and creation of a job portal from scratch, using WordPress, PHP, HTML/CSS and JS. Responsive and pixel-perfect from Figma.',
+      'proj2.title':       'Personal Projects',
+      'proj2.desc':        'UI studies and experiments, interactive components and personal projects. GitHub links coming soon.',
+      'proj3.title':       'New project coming soon',
+      'proj3.desc':        'Working on a new project to add to the portfolio. Check back soon or get in touch.',
+      'proj.view_site':    'View site →',
+      'proj.contact_me':   'Contact me →',
+      'proj.talk_to_me':   'Talk to me →',
+      'exp.controlid.role':   'Access Control Technician',
+      'exp.controlid.desc':   'Configuration and maintenance of facial recognition and RFID equipment. Fault diagnosis and technical support in corporate environments.',
+      'exp.controlid.period': 'Dec/2025 — present',
+      'exp.innolevels.role':  'Fullstack Intern',
+      'exp.innolevels.desc':  'Full redesign of the company website using WordPress and PHP. Allocated to enterprise clients with deploys, code review, Umbraco CMS and back-end.',
+      'exp.innolevels.period':'Oct/2023 — Nov/2025',
+      'exp.obinvest.role':    'Front-end Intern',
+      'exp.obinvest.desc':    'Maintenance of the institutional website with HTML, CSS and GitHub. Collaboration with UX/UI team and Python automations (Selenium + SMTP).',
+      'exp.obinvest.period':  'May/2023 — Oct/2023',
+      'exp.see_details':      'See details →',
+      'footer.copy':          '© 2025 Miguel Rodrigues Freitas',
+      'footer.location':      'Rio de Janeiro, RJ 🇧🇷',
+      'level.advanced':       'Advanced',
+      'level.intermediate':   'Intermediate',
+      'level.basic':          'Basic',
+      'level.experienced':    'Experienced',
+      'tag.soon':             'Coming soon',
+      'soft.teamwork':        'Teamwork',
+      'soft.communication':   'Communication',
+      'soft.improvement':     'Continuous improvement',
+      'hero.card1_years':     'years',
+    },
+    es: {
+      'nav.projects':    'Proyectos',
+      'nav.experience':  'Experiencia',
+      'nav.contact':     'Contacto',
+      'nav.cta':         'Contáctame',
+      'hero.badge':      'Disponible para nuevas oportunidades',
+      'hero.sub':        'Desarrollador Fullstack con 2 años de experiencia creando interfaces para <strong>Teleperformance</strong> y <strong>Claro</strong>.<br> HTML · CSS · JS · Bootstrap · WordPress y más.',
+      'hero.btn_projects': 'Ver proyectos →',
+      'hero.btn_contact':  '✉ Contacto',
+      'hero.card1_label':  'Experiencia',
+      'hero.card1_sub':    'Dev Fullstack',
+      'hero.card2_label':  'Clientes',
+      'hero.scroll':       'scroll',
+      'skills.tag':        '// stack técnico',
+      'skills.title':      'Habilidades',
+      'projects.tag':      '// portafolio',
+      'projects.title':    'Proyectos',
+      'experience.tag':    '// trayectoria',
+      'experience.title':  'Experiencia',
+      'contact.tag':       '// hablemos',
+      'contact.title':     'Contacto',
+      'contact.sub':       '¡Abierto a oportunidades de pasantía y junior en front-end. Escríbeme!',
+      'tab.frontend':      'Front-end',
+      'tab.backend':       'Back-end',
+      'tab.cms':           'CMS',
+      'tab.tools':         'Herramientas',
+      'tab.soft':          'Habilidades blandas',
+      'proj1.title':       'Sitio Innolevels + Portal de Empleo',
+      'proj1.desc':        'Rediseño completo del sitio institucional y creación de un portal de empleo desde cero, con WordPress, PHP, HTML/CSS y JS. Responsivo y fiel al Figma.',
+      'proj2.title':       'Proyectos Personales',
+      'proj2.desc':        'Estudios y experimentos de UI, componentes interactivos y proyectos personales. Próximamente con links a GitHub.',
+      'proj3.title':       'Nuevo proyecto en camino',
+      'proj3.desc':        'Trabajando en un nuevo proyecto para agregar al portafolio. Vuelve pronto o contáctame.',
+      'proj.view_site':    'Ver sitio →',
+      'proj.contact_me':   'Contáctame →',
+      'proj.talk_to_me':   'Háblame →',
+      'exp.controlid.role':   'Técnico de Control de Acceso',
+      'exp.controlid.desc':   'Configuración y mantenimiento de equipos de reconocimiento facial y RFID. Diagnóstico de fallas y soporte técnico en entornos corporativos.',
+      'exp.controlid.period': 'dic/2025 — actual',
+      'exp.innolevels.role':  'Pasante Front-end',
+      'exp.innolevels.desc':  'Reformulación completa del sitio institucional con WordPress y PHP. Asignado a clientes enterprise con deploys, code review, Umbraco CMS y back-end.',
+      'exp.innolevels.period':'oct/2023 — nov/2025',
+      'exp.obinvest.role':    'Pasante Fullstack',
+      'exp.obinvest.desc':    'Mantenimiento del sitio institucional con HTML, CSS y GitHub. Colaboración con el equipo de UX/UI y automatizaciones en Python (Selenium + SMTP).',
+      'exp.obinvest.period':  'may/2023 — oct/2023',
+      'exp.see_details':      'Ver detalles →',
+      'footer.copy':          '© 2025 Miguel Rodrigues Freitas',
+      'footer.location':      'Río de Janeiro, RJ 🇧🇷',
+      'level.advanced':       'Avanzado',
+      'level.intermediate':   'Intermedio',
+      'level.basic':          'Básico',
+      'level.experienced':    'Experimentado',
+      'tag.soon':             'Próximamente',
+      'soft.teamwork':        'Trabajo en equipo',
+      'soft.communication':   'Comunicación',
+      'soft.improvement':     'Mejora continua',
+      'hero.card1_years':     'años',
+    }
+  };
+
+  function detectLang() {
+    const saved = localStorage.getItem('portfolio_lang');
+    if (saved && translations[saved]) return saved;
+    const browser = (navigator.language || navigator.userLanguage || 'pt').toLowerCase().slice(0, 2);
+    if (translations[browser]) return browser;
+    return 'pt';
+  }
+
+  function applyLang(lang) {
+    const t = translations[lang] || translations['pt'];
+
+    // texto simples
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // texto com HTML
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    // atualizar botões do switcher
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // salvar preferência
+    localStorage.setItem('portfolio_lang', lang);
+
+    // atualizar lang do html
+    document.documentElement.lang = lang;
+  }
+
+  // init
+  const currentLang = detectLang();
+  applyLang(currentLang);
+
+  // botões do switcher
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
 
 </script>
 </body>
